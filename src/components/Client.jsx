@@ -6,24 +6,22 @@ const Client = ({ dataContainer, name, isVaccinated }) => {
   const [vac, setvac] = useState(isVaccinated);
 
   const toggleVacStat = () => {
-    const vacStat = document.querySelector("#vacStat");
-    const petName = document.querySelector("#petName");
+    vac ? setvac(false) : setvac(true);
 
-    (vac) ? setvac(false) : setvac(true);
-
-    const dataToSend = {
-      name: `${petName.innerHTML}`,
-      isVaccinated: `${vac}}`,
-    };
+    for (const pet of dataContainer) {
+      if (pet.name === name) {
+        pet.isVaccinated = vac;
+      }
+    }
 
     const options = {
       method: "POST",
       headers: {
         "Content-type": "application/json",
       },
-      body: JSON.stringify(dataToSend),
+      body: JSON.stringify(dataContainer),
     };
-    console.log(dataToSend);
+
     setWaitingStatus(true);
     fetch("https://demoapi.com/api/vet/pets/", options)
       .then((res) => res.json())
@@ -37,7 +35,12 @@ const Client = ({ dataContainer, name, isVaccinated }) => {
         Name: <span id="petName">{name}</span>
       </span>
       <span>
-        isVaccinated: {isWaiting ? "..." : <span id="vacStat">{isVaccinated}</span>}
+        isVaccinated:{" "}
+        {isWaiting ? (
+          "..."
+        ) : (
+          <span id="vacStat">{isVaccinated ? "true" : "false"}</span>
+        )}
       </span>
       <button onClick={toggleVacStat}>Toggle</button>
     </div>

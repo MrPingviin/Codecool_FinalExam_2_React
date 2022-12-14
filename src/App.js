@@ -20,7 +20,6 @@ const App = () => {
     const data = await fetchData.json();
 
     dataContainer.push(data);
-    console.log(data);
     return setSearchLaunched(true);
   };
 
@@ -33,7 +32,7 @@ const App = () => {
       </button>
       {searchLaunched
         ? dataContainer.map((item) => {
-            return <Client name={item.name} isVaccinated={item.isVaccinated} />;
+            return <Client name={item.name} isVaccinated={item.isVaccinated} dataContainer={dataContainer} />;
           })
         : null}
     </div>
