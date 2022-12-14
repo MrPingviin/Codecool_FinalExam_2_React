@@ -9,7 +9,7 @@ const Client = ({ dataContainer, name, isVaccinated }) => {
     const vacStat = document.querySelector("#vacStat");
     const petName = document.querySelector("#petName");
 
-    (vac) ? setvac("false") : setvac("true");
+    (vac) ? setvac(false) : setvac(true);
 
     const dataToSend = {
       name: `${petName.innerHTML}`,
