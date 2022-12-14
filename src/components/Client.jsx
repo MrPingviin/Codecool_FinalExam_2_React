@@ -8,11 +8,13 @@ const Client = ({ dataContainer, name, isVaccinated }) => {
   const toggleVacStat = () => {
     vac ? setvac(false) : setvac(true);
 
-    for (const pet of dataContainer) {
-      if (pet.name === name) {
-        pet.isVaccinated = vac;
+    for (let i = 0; i < dataContainer.length; i++) {
+      if (dataContainer[i].name === name) {
+        dataContainer[i].isVaccinated = vac;
       }
     }
+
+    console.log(dataContainer)
 
     const options = {
       method: "POST",
